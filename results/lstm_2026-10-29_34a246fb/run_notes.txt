@@ -1,0 +1,1 @@
+﻿Training stopped at user request during epoch 2. The saved checkpoint is from completed epoch 1. Evaluation uses this checkpoint. The previous group model is preserved as previous_best_lstm.pt.
