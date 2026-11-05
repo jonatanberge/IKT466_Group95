@@ -1,1 +1,1 @@
-﻿print("Hello LSTM!")
+﻿input("Hello LSTM!")
