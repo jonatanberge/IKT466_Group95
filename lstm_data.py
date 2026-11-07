@@ -1,5 +1,4 @@
-﻿
-import re
+﻿import re
 from collections import Counter
 
 import pandas as pd
