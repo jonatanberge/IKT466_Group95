@@ -1,0 +1,51 @@
+[
+  {
+    "path": "models/lstm_length_500.pt",
+    "max_length": 500,
+    "matches_current_training_vocabulary": true,
+    "weights_sha256": "b164d137ebf4ee3b5eecd469c1d9e0fcb5805af1b904f65b6acb8eecc32e0415",
+    "checkpoint_sha256": "cebffd8d95991211d5abe34e016fd3723344d6fe6d41cf22ca383bc04f227b3a"
+  },
+  {
+    "path": "models/lstm_length_50.pt",
+    "max_length": 50,
+    "matches_current_training_vocabulary": true,
+    "weights_sha256": "6af674cb28ddb5f9f668e5e022dcdf62522269d056fd0a43f9103ce1238e3a11",
+    "checkpoint_sha256": "49662f1a68c9a6f615c46445d5030b5a34bb5a0793c6b4fc8f77d9624d1181ee"
+  },
+  {
+    "path": "models/best_lstm.pt",
+    "max_length": 250,
+    "matches_current_training_vocabulary": true,
+    "weights_sha256": "7fce48f9f096bb600387dbd98efc44b52f8fe41d9562044516ff256eca9de090",
+    "checkpoint_sha256": "fb5bcf342297b497d57b220c1201acd4ad197864ff13727a5c6be0a1ab7f9364"
+  },
+  {
+    "path": "models/lstm_length_250.pt",
+    "max_length": 250,
+    "matches_current_training_vocabulary": true,
+    "weights_sha256": "3bbcc4c7976043b2e28879f4eedb7b35c479ca88016397c328b6d6e8ca2efd30",
+    "checkpoint_sha256": "a7770bcc7aef29827f8052774624d8c1926487c55ad947f5d99dc8610002b6a7"
+  },
+  {
+    "path": "models/lstm_length_100.pt",
+    "max_length": 100,
+    "matches_current_training_vocabulary": true,
+    "weights_sha256": "49c61ccf4ba02e5f197aa17223a096a3fa04221624a9835c92a6a674101307f2",
+    "checkpoint_sha256": "609fbe8af63f5389440e1b5894d968b66f9ab1173de8dd4bcbd3bc92cd068116"
+  },
+  {
+    "path": "results/lstm_2026-10-29_34a246fb/best_lstm.pt",
+    "max_length": 250,
+    "matches_current_training_vocabulary": true,
+    "weights_sha256": "7fce48f9f096bb600387dbd98efc44b52f8fe41d9562044516ff256eca9de090",
+    "checkpoint_sha256": "fb5bcf342297b497d57b220c1201acd4ad197864ff13727a5c6be0a1ab7f9364"
+  },
+  {
+    "path": "results/lstm_2026-10-29_34a246fb/previous_best_lstm.pt",
+    "max_length": 250,
+    "matches_current_training_vocabulary": true,
+    "weights_sha256": "3bbcc4c7976043b2e28879f4eedb7b35c479ca88016397c328b6d6e8ca2efd30",
+    "checkpoint_sha256": "b26b8e3ee9af666d92e78179b536a8ee4bc73f103f37cd2b46ae48fd47863d2f"
+  }
+]
