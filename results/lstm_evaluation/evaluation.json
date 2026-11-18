@@ -1,0 +1,265 @@
+{
+  "created_utc": "2026-11-17T12:33:49.523794+00:00",
+  "test_path": "/Users/sanderolsen/IKT466_exam/IKT466_Group95/data/splits/test.csv",
+  "test_sha256": "1c5d6c27d40e6e33ff34b77c19ddb34d28fad6717494fb92ad71c81c42b370a3",
+  "full_test_samples": 9917,
+  "evaluated_samples": 9917,
+  "partial": false,
+  "device": "cpu",
+  "batch_size": 64,
+  "threshold": 0.5,
+  "class_order": [
+    "negative",
+    "positive"
+  ],
+  "tokenization": "lstm_data.tokenize: lowercase words and individual punctuation; first N tokens",
+  "versions": {
+    "python": "3.9.6",
+    "torch": "2.8.0",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.6.1"
+  },
+  "source_sha256": {
+    "evaluate_lstm.py": "807776668f0b830929e8959b992d8918bb1ecac309ba5100c3cb7efb5eb90e2a",
+    "lstm_data.py": "0d37e04c0f84d74830d5a7cead8b16c03da1727a500335bcaddd9a524f7f8064",
+    "lstm_model.py": "79955444e3d5d2ae1c2867687ffef9b5dac7b24181cf3686069cd9cc57d60b62"
+  },
+  "runs": [
+    {
+      "checkpoint": "lstm_length_50.pt",
+      "checkpoint_sha256": "49662f1a68c9a6f615c46445d5030b5a34bb5a0793c6b4fc8f77d9624d1181ee",
+      "max_length": 50,
+      "test_samples": 9917,
+      "partial": false,
+      "loss": 0.4955096052961627,
+      "accuracy": 0.7587980235958455,
+      "f1_positive": 0.7542129058775174,
+      "macro_f1": 0.7587140553937182,
+      "reviews_truncated": 9837,
+      "checkpoint_path": "/Users/sanderolsen/IKT466_exam/IKT466_Group95/models/lstm_length_50.pt",
+      "config": {
+        "embedding_dim": 128,
+        "hidden_dim": 128,
+        "num_layers": 1,
+        "dropout": 0.3,
+        "max_length": 50
+      },
+      "vocabulary_size": 20000,
+      "training_provenance": "Epoch and run metadata absent from checkpoint; not inferred.",
+      "classification_report": {
+        "negative": {
+          "precision": 0.74680356450988,
+          "recall": 0.7803643724696356,
+          "f1-score": 0.7632152049099188,
+          "support": 4940.0
+        },
+        "positive": {
+          "precision": 0.7718191377497371,
+          "recall": 0.737392003214788,
+          "f1-score": 0.7542129058775174,
+          "support": 4977.0
+        },
+        "accuracy": 0.7587980235958455,
+        "macro avg": {
+          "precision": 0.7593113511298085,
+          "recall": 0.7588781878422118,
+          "f1-score": 0.7587140553937182,
+          "support": 9917.0
+        },
+        "weighted avg": {
+          "precision": 0.7593580172692597,
+          "recall": 0.7587980235958455,
+          "f1-score": 0.7586972617532927,
+          "support": 9917.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          3855,
+          1085
+        ],
+        [
+          1307,
+          3670
+        ]
+      ]
+    },
+    {
+      "checkpoint": "lstm_length_100.pt",
+      "checkpoint_sha256": "609fbe8af63f5389440e1b5894d968b66f9ab1173de8dd4bcbd3bc92cd068116",
+      "max_length": 100,
+      "test_samples": 9917,
+      "partial": false,
+      "loss": 0.4323565682252232,
+      "accuracy": 0.8051830190581829,
+      "f1_positive": 0.8134054471701758,
+      "macro_f1": 0.8048039894078727,
+      "reviews_truncated": 9116,
+      "checkpoint_path": "/Users/sanderolsen/IKT466_exam/IKT466_Group95/models/lstm_length_100.pt",
+      "config": {
+        "embedding_dim": 128,
+        "hidden_dim": 128,
+        "num_layers": 1,
+        "dropout": 0.3,
+        "max_length": 100
+      },
+      "vocabulary_size": 20000,
+      "training_provenance": "Epoch and run metadata absent from checkpoint; not inferred.",
+      "classification_report": {
+        "negative": {
+          "precision": 0.8312775330396476,
+          "recall": 0.7639676113360324,
+          "f1-score": 0.7962025316455696,
+          "support": 4940.0
+        },
+        "positive": {
+          "precision": 0.7831504556444114,
+          "recall": 0.8460920233072132,
+          "f1-score": 0.8134054471701758,
+          "support": 4977.0
+        },
+        "accuracy": 0.8051830190581829,
+        "macro avg": {
+          "precision": 0.8072139943420296,
+          "recall": 0.8050298173216228,
+          "f1-score": 0.8048039894078727,
+          "support": 9917.0
+        },
+        "weighted avg": {
+          "precision": 0.8071242140726121,
+          "recall": 0.8051830190581829,
+          "f1-score": 0.8048360811631622,
+          "support": 9917.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          3774,
+          1166
+        ],
+        [
+          766,
+          4211
+        ]
+      ]
+    },
+    {
+      "checkpoint": "lstm_length_250.pt",
+      "checkpoint_sha256": "a7770bcc7aef29827f8052774624d8c1926487c55ad947f5d99dc8610002b6a7",
+      "max_length": 250,
+      "test_samples": 9917,
+      "partial": false,
+      "loss": 0.34063015453419015,
+      "accuracy": 0.8631642633861046,
+      "f1_positive": 0.8665027053615347,
+      "macro_f1": 0.8630786357503712,
+      "reviews_truncated": 4080,
+      "checkpoint_path": "/Users/sanderolsen/IKT466_exam/IKT466_Group95/models/lstm_length_250.pt",
+      "config": {
+        "embedding_dim": 128,
+        "hidden_dim": 128,
+        "num_layers": 1,
+        "dropout": 0.3,
+        "max_length": 250
+      },
+      "vocabulary_size": 20000,
+      "training_provenance": "Epoch and run metadata absent from checkpoint; not inferred.",
+      "classification_report": {
+        "negative": {
+          "precision": 0.8788327341932756,
+          "recall": 0.8412955465587044,
+          "f1-score": 0.8596545661392078,
+          "support": 4940.0
+        },
+        "positive": {
+          "precision": 0.848882035466461,
+          "recall": 0.8848704038577456,
+          "f1-score": 0.8665027053615347,
+          "support": 4977.0
+        },
+        "accuracy": 0.8631642633861046,
+        "macro avg": {
+          "precision": 0.8638573848298683,
+          "recall": 0.863082975208225,
+          "f1-score": 0.8630786357503712,
+          "support": 9917.0
+        },
+        "weighted avg": {
+          "precision": 0.8638015122951858,
+          "recall": 0.8631642633861046,
+          "f1-score": 0.8630914108411862,
+          "support": 9917.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          4156,
+          784
+        ],
+        [
+          573,
+          4404
+        ]
+      ]
+    },
+    {
+      "checkpoint": "lstm_length_500.pt",
+      "checkpoint_sha256": "cebffd8d95991211d5abe34e016fd3723344d6fe6d41cf22ca383bc04f227b3a",
+      "max_length": 500,
+      "test_samples": 9917,
+      "partial": false,
+      "loss": 0.3536512650488557,
+      "accuracy": 0.8568115357466976,
+      "f1_positive": 0.8544783767165403,
+      "macro_f1": 0.8567747183304812,
+      "reviews_truncated": 1353,
+      "checkpoint_path": "/Users/sanderolsen/IKT466_exam/IKT466_Group95/models/lstm_length_500.pt",
+      "config": {
+        "embedding_dim": 128,
+        "hidden_dim": 128,
+        "num_layers": 1,
+        "dropout": 0.3,
+        "max_length": 500
+      },
+      "vocabulary_size": 20000,
+      "training_provenance": "Epoch and run metadata absent from checkpoint; not inferred.",
+      "classification_report": {
+        "negative": {
+          "precision": 0.8426791277258567,
+          "recall": 0.8761133603238866,
+          "f1-score": 0.8590710599444223,
+          "support": 4940.0
+        },
+        "positive": {
+          "precision": 0.8719933068395733,
+          "recall": 0.8376532047418124,
+          "f1-score": 0.8544783767165403,
+          "support": 4977.0
+        },
+        "accuracy": 0.8568115357466976,
+        "macro avg": {
+          "precision": 0.857336217282715,
+          "recall": 0.8568832825328495,
+          "f1-score": 0.8567747183304812,
+          "support": 9917.0
+        },
+        "weighted avg": {
+          "precision": 0.8573909024005535,
+          "recall": 0.8568115357466976,
+          "f1-score": 0.8567661507556384,
+          "support": 9917.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          4328,
+          612
+        ],
+        [
+          808,
+          4169
+        ]
+      ]
+    }
+  ]
+}

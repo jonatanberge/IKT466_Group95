@@ -1,0 +1,19 @@
+{
+  "bootstrap_iterations": 5000,
+  "seed": 42,
+  "method": "Ordinary paired review bootstrap; 95% percentile intervals; same sampled rows across all models.",
+  "interval_scope": "Fixed trained models; test-review sampling only; no retraining variability. Pairwise intervals are unadjusted for multiple comparisons.",
+  "source_files_sha256": {
+    "summary.csv": "8a1bfa328080c9cffd3c157ac51007cfee18cd35f44ab0e57c628750c027dc2d",
+    "evaluation.json": "16b10961352504a0eeb41b67bbee8d7afd0743162b55235ea5e64480f5e94a26",
+    "predictions_100.csv": "bfa6c1361b5ce19f43b13a745c3be62259a332979ee79c1fe455029c528065fa",
+    "predictions_250.csv": "cc70c0947cc7213fc178e613f5c6afe7c7613312a21da7a6f6d17965cebe43dd",
+    "predictions_50.csv": "c9326ba46ad2f98395e0ec7daa2be0be65f1c7962e4b2f2cb110120e5be648ea",
+    "predictions_500.csv": "1c596362f28f44e4741cd578b0dd026caa62b4d6b9a5c314829b5a0924ac64dc"
+  },
+  "analysis_source_sha256": "43e460e559250450f54c3a3194302f90e47ebdf1f10bb405ec7fbc2a1e0b1c91",
+  "versions": {
+    "numpy": "2.0.2",
+    "matplotlib": "3.9.4"
+  }
+}
