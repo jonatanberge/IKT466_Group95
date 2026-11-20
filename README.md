@@ -1,73 +1,171 @@
-# IKT466_Group95
+# IKT466 – Sentiment Analysis of IMDb Movie Reviews
 
-## LSTM evaluation
+Machine Learning Project – Group 95
 
-Evaluate the saved 50-, 100-, 250-, and 500-token models on the held-out test split:
+## 1. Project Overview
 
-```sh
+This project investigates sentiment classification of IMDb movie reviews using two machine learning models: **Multinomial Naive Bayes (MNB)** and **Long Short-Term Memory (LSTM)**.
+
+The objective is to classify movie reviews as either positive or negative and compare the performance of the two approaches. The project also investigates how different maximum token lengths (50, 100, 250, and 500 tokens) affect classification performance.
+
+Both models are evaluated using accuracy and macro F1-score.
+
+## 2. Dataset
+
+The project uses the IMDb Dataset of 50,000 Movie Reviews, containing an equal number of positive and negative reviews.
+
+The dataset is preprocessed using `prepare_data.py`, which:
+
+- Removes duplicate reviews.
+- Converts sentiment labels into numerical values (0 = negative, 1 = positive).
+- Splits the data into training (60%), validation (20%), and testing (20%) sets.
+
+The prepared datasets are saved in `data/splits/`.
+
+## 3. Installation
+
+### Prerequisites
+
+- Python 3.9 or newer, with a version compatible with the installed dependencies
+- Git
+- pip
+
+### Clone the repository
+
+```bash
+git clone https://github.com/jonatanberge/IKT466_Group95.git
+cd IKT466_Group95
+```
+
+### Create a virtual environment
+
+On Windows (PowerShell):
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+On macOS/Linux:
+
+```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-evaluation.txt
-.venv/bin/python evaluate_lstm.py
+source .venv/bin/activate
 ```
 
-The final results are in `results/lstm_evaluation/`. New evaluations create a
-separate timestamped folder. Use `--output-dir` to choose a new destination;
-existing folders are preserved. `--checkpoints`, `--test-path`, `--batch-size`,
-and `--device` provide overrides. `--limit N` allows a quick partial check, whose
-results must not be used for final reporting.
+### Install dependencies
 
-### Saved files
-
-- `summary.csv`: loss, accuracy, positive-class F1, macro F1, and truncation counts.
-- `evaluation.json`: per-class metrics, confusion matrices, model configurations,
-  software versions, and source/checkpoint hashes.
-- `predictions_N.csv`: per-review predictions and probabilities, token counts,
-  source CSV row (`test_row`), and stable review identifier.
-- `checkpoint_audit.json`: checkpoint identities and training-vocabulary checks.
-- `analysis/`: LSTM confidence intervals, paired differences, prediction transitions,
-  selected error examples, metadata, and two PNG figures.
-- `model_comparison/`: matched Naive Bayes predictions, model-comparison tables,
-  metadata, and a comparison PNG.
-
-Discussion and interpretation belong in the external project report; the scripts
-save data and figures without generating Markdown reports or duplicate PDF copies.
-The error examples include the original text and exact normalized input tokens.
-Negation/contrast categories use lexical cues, not verified explanations of errors.
-
-### Reproduce analysis and comparison
-
-```sh
-.venv/bin/python analyze_lstm.py results/lstm_evaluation --output-dir /tmp/lstm_analysis
-.venv/bin/python compare_sentiment_models.py results/lstm_evaluation --output-dir /tmp/lstm_comparison
-.venv/bin/python -m unittest discover -s tests -v
+```bash
+python -m pip install -r requirements-evaluation.txt
 ```
 
-Choose fresh output folders when rerunning these commands. Both analysis scripts
-use 5,000 paired bootstrap draws (seed 42). Intervals estimate test-review sampling
-uncertainty for fixed weights, exclude training-seed variation, and are unadjusted
-for multiple comparisons. Metadata records settings and input/source hashes.
+This installs the required libraries for data processing, model evaluation, and training, including scikit-learn, PyTorch, pandas, NumPy, and Matplotlib.
 
-### Experimental setup
+## 4. Running the Code
 
-Accuracy and **macro F1** are the main comparison metrics. Positive sentiment is
-class 1; the LSTM threshold is 0.5. Each checkpoint supplies its training vocabulary
-and configuration. Nothing is fitted on test data.
+All commands should be executed from the root directory of the repository.
 
-Both model families receive the same first N lowercase word/punctuation tokens.
-The matched Naive Bayes baseline uses training-only TF-IDF (10,000 features) and
-MultinomialNB(alpha=1.0), preserving punctuation and single-character tokens.
-`models/naive_bayes.py` is the original, separate validation analysis.
+### 4.1 Prepare the dataset
 
-Each token budget uses a separately trained LSTM, so differences reflect training
-and evaluation under that budget. The experiment varies text per review, not
-training-set size. HTML remains in the existing preprocessing.
+```bash
+python prepare_data.py
+```
 
-Checkpoint epochs and full training-run metadata are unavailable. The audit shows
-that `models/best_lstm.pt` matches the archived interrupted one-epoch model;
-`models/lstm_length_250.pt` matches the archived `previous_best_lstm.pt`.
-Evaluation uses the four length-specific checkpoints. Vocabulary agreement does
-not establish complete historical training provenance.
+This removes duplicate reviews, converts sentiment labels into numerical values, and generates the training, validation, and test datasets.
 
-The older `results/lstm_2026-10-29_34a246fb/` archive and
-`results/review_length_results.csv` predate this evaluation; the latter contains
-validation metrics, not final test results.
+The resulting CSV files are stored in `data/splits/`.
+
+### 4.2 Naive Bayes
+
+The Naive Bayes model uses TF-IDF to convert text into numerical features before classification.
+
+The model is implemented using Multinomial Naive Bayes from scikit-learn. Experiments investigate different token lengths and hyperparameter configurations.
+
+The matched Naive Bayes baseline used for the final comparison is executed through `compare_sentiment_models.py`, as described in Section 4.5.
+
+### 4.3 Train the LSTM model
+
+```bash
+python train_lstm.py
+```
+
+This trains the standard LSTM model using the training dataset and monitors validation loss to select the best checkpoint.
+
+The trained model is saved as `models/best_lstm.pt`.
+
+### 4.4 Run the LSTM token-length experiment
+
+```bash
+python experiment_review_length.py
+```
+
+This trains separate LSTM models using the token lengths specified in the script.
+
+To run all four configurations, set:
+
+```python
+MAX_LENGTHS = [50, 100, 250, 500]
+```
+
+The trained models are saved in `models/`, and the experimental results are saved in `results/review_length_results.csv`.
+
+### 4.5 Evaluate and compare the models
+
+**Evaluate the LSTM models:**
+
+```bash
+python evaluate_lstm.py
+```
+
+This evaluates the saved LSTM checkpoints for 50, 100, 250, and 500 tokens using the test dataset.
+
+The evaluation creates a timestamped directory under `results/`, containing performance metrics and predictions.
+
+**Analyze the LSTM results:**
+
+```bash
+python analyze_lstm.py results/lstm_evaluation_<timestamp>
+```
+
+**Compare Naive Bayes and LSTM:**
+
+```bash
+python compare_sentiment_models.py results/lstm_evaluation_<timestamp>
+```
+
+Replace `<timestamp>` with the directory name generated by the evaluation script.
+
+The comparison script trains the matched Naive Bayes baselines and compares their predictions against the LSTM models using the same test reviews and token limits.
+
+The evaluation and comparison scripts require the saved LSTM checkpoints to be available.
+
+## 5. Models and Evaluation
+
+### Multinomial Naive Bayes
+
+Naive Bayes is a probabilistic classifier that uses TF-IDF features to represent the importance of words and word combinations in movie reviews.
+
+### Long Short-Term Memory
+
+LSTM is a recurrent neural network that processes text as sequences of tokens, allowing it to learn patterns and relationships within reviews.
+
+### Evaluation Metrics
+
+Both models are evaluated primarily using:
+
+- **Accuracy:** The proportion of correctly classified reviews.
+- **Macro F1-score:** The average F1-score across the positive and negative sentiment classes.
+
+The models are compared across maximum token lengths of 50, 100, 250, and 500 tokens.
+
+## 6. Results
+
+Experimental results, model predictions, evaluation metrics, and visualizations are stored in the `results/` directory.
+
+For detailed descriptions of the methodology, experimental findings, and discussion, refer to the accompanying project report.
+
+---
+
+**IKT466 – Introduction to Machine Learning**
+
+Group 95
