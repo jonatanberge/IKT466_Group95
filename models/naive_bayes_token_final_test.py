@@ -15,9 +15,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 train_df = pd.read_csv(BASE_DIR / "data/splits/train.csv")
 val_df = pd.read_csv(BASE_DIR / "data/splits/val.csv")
+test_df = pd.read_csv(BASE_DIR / "data/splits/test.csv")
+
+train_df = pd.concat(
+    [train_df, val_df],
+    ignore_index=True
+)
 
 y_train = train_df["sentiment"]
-y_val = val_df["sentiment"]
+y_test = test_df["sentiment"]
 
 TOKEN_LENGTHS = [50, 100, 250, 500]
 
@@ -42,32 +48,35 @@ for max_tokens in TOKEN_LENGTHS:
         lambda text: truncate_review(text, max_tokens)
     )
 
-    val_texts = val_df["review"].apply(
+    test_texts = test_df["review"].apply(
         lambda text: truncate_review(text, max_tokens)
     )
 
     # Create a new TF-IDF vectorizer
-    vectorizer = TfidfVectorizer(max_features=10000)
+    vectorizer = TfidfVectorizer(
+        max_features=20000,
+        ngram_range=(1, 2)
+    )
 
     X_train = vectorizer.fit_transform(train_texts)
-    X_val = vectorizer.transform(val_texts)
+    X_test = vectorizer.transform(test_texts)
 
     # Train Naive Bayes
     model = MultinomialNB(alpha=1.0)
     model.fit(X_train, y_train)
 
     # Evaluate
-    predictions = model.predict(X_val)
+    predictions = model.predict(X_test)
 
-    accuracy = accuracy_score(y_val, predictions)
+    accuracy = accuracy_score(y_test, predictions)
     precision = precision_score(
-        y_val, predictions, average="macro"
+        y_test, predictions, average="macro"
     )
     recall = recall_score(
-        y_val, predictions, average="macro"
+        y_test, predictions, average="macro"
     )
     f1 = f1_score(
-        y_val, predictions, average="macro"
+        y_test, predictions, average="macro"
     )
 
     print(f"Accuracy:  {accuracy:.4f}")
@@ -90,7 +99,7 @@ results_dir.mkdir(parents=True, exist_ok=True)
 results_df = pd.DataFrame(results)
 
 results_df.to_csv(
-    results_dir / "token_length_results.csv",
+    results_dir / "naive_bayes_test_results.csv",
     index=False
 )
 
