@@ -93,7 +93,7 @@ results_dir.mkdir(parents=True, exist_ok=True)
 results_df = pd.DataFrame(results)
 
 results_df.to_csv(
-    results_dir / "token_length_tuned_results.csv",
+    results_dir / "naive_bayes_tuned_results.csv",
     index=False
 )
 
