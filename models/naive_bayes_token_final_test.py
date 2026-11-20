@@ -1,5 +1,6 @@
 import re
 import pandas as pd
+import matplotlib.pyplot as plt
 from pathlib import Path
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -103,4 +104,27 @@ results_df.to_csv(
     index=False
 )
 
-print("\nResults saved successfully!")
+plt.figure(figsize=(10, 6))
+plt.plot(
+    results_df["max_tokens"],
+    results_df["f1_macro"],
+    marker="o",
+    linewidth=2,
+    label="Macro F1"
+)
+
+plt.title("Naive Bayes Performance by Token Length")
+plt.xlabel("Maximum token length")
+plt.ylabel("Macro F1-score")
+plt.ylim(0, 1)
+plt.xticks(results_df["max_tokens"])
+plt.grid(True, alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.savefig(
+    results_dir / "naive_bayes_token_length_plot.png",
+    dpi=300
+)
+plt.close()
+
+print("\nResults and plot saved successfully!")
