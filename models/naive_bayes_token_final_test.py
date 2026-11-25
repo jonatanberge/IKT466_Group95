@@ -44,7 +44,6 @@ for max_tokens in TOKEN_LENGTHS:
 
     print(f"\nMaximum tokens: {max_tokens}")
 
-    # Truncate training and validation reviews
     train_texts = train_df["review"].apply(
         lambda text: truncate_review(text, max_tokens)
     )
@@ -53,7 +52,6 @@ for max_tokens in TOKEN_LENGTHS:
         lambda text: truncate_review(text, max_tokens)
     )
 
-    # Create a new TF-IDF vectorizer
     vectorizer = TfidfVectorizer(
         max_features=20000,
         ngram_range=(1, 2)
@@ -62,11 +60,9 @@ for max_tokens in TOKEN_LENGTHS:
     X_train = vectorizer.fit_transform(train_texts)
     X_test = vectorizer.transform(test_texts)
 
-    # Train Naive Bayes
     model = MultinomialNB(alpha=1.0)
     model.fit(X_train, y_train)
 
-    # Evaluate
     predictions = model.predict(X_test)
 
     accuracy = accuracy_score(y_test, predictions)
@@ -92,8 +88,7 @@ for max_tokens in TOKEN_LENGTHS:
     "recall_macro": recall,
     "f1_macro": f1
 })
-    
-# Save experiment results
+
 results_dir = BASE_DIR / "results" / "naive_bayes"
 results_dir.mkdir(parents=True, exist_ok=True)
 
