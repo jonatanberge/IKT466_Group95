@@ -1,16 +1,24 @@
 {
   "train_sha256": "713b613bbd2ebd20971a5f2ec9cfdf64d188e622d7396080b86ae1533b9262ac",
+  "val_sha256": "4aaa60519a47a06b9ae39bd27c026b10f3465012de1b2cf8fe827fc4283678a2",
   "test_sha256": "1c5d6c27d40e6e33ff34b77c19ddb34d28fad6717494fb92ad71c81c42b370a3",
   "train_samples": 29749,
+  "val_samples": 9916,
+  "naive_bayes_fit_samples": 39665,
   "test_samples": 9917,
-  "max_features": 10000,
+  "max_features": 20000,
   "alpha": 1.0,
-  "feature_definition": "TF-IDF unigrams over exact lstm_data.tokenize prefix tokens, including punctuation; training-only IDF/vocabulary.",
-  "hyperparameters": "Fixed baseline settings; no test-driven tuning; validation data not used for fitting.",
+  "ngram_range": [
+    1,
+    2
+  ],
+  "feature_definition": "TF-IDF word unigrams and bigrams after final Naive Bayes token truncation.",
+  "hyperparameters": "Final Naive Bayes settings with vocabulary, IDF and classifier fitted on train plus validation.",
+  "naive_bayes_source_sha256": "6757478d45d087f29772e0036523ecb72d595d3f70a28fcf2ebec6e83437f107",
   "bootstrap_iterations": 5000,
   "seed": 42,
   "interval_scope": "Fixed models, review-sampling uncertainty; paired percentile intervals, unadjusted for multiple comparisons.",
-  "source_sha256": "502e08841a8ac9c5d3f4efec31756a79904979facf0f1b864f86b24c602d43e5",
+  "source_sha256": "a67cabd39c582b25345a04f24bbe83565dc2105460666cb655ce7f6610b4e8e3",
   "sklearn_version": "1.6.1",
   "lstm_input_hashes": {
     "predictions_100.csv": "bfa6c1361b5ce19f43b13a745c3be62259a332979ee79c1fe455029c528065fa",
@@ -21,165 +29,165 @@
   "naive_bayes_reports": [
     {
       "max_length": 50,
-      "vocabulary_size": 10000,
+      "vocabulary_size": 20000,
       "classification_report": {
         "negative": {
-          "precision": 0.7588893328006392,
-          "recall": 0.7690283400809717,
-          "f1-score": 0.7639251960587171,
+          "precision": 0.7898611695414388,
+          "recall": 0.7601214574898786,
+          "f1-score": 0.7747060037136373,
           "support": 4940.0
         },
         "positive": {
-          "precision": 0.7676644267969863,
-          "recall": 0.7574844283705043,
-          "f1-score": 0.7625404530744336,
+          "precision": 0.7704822777454968,
+          "recall": 0.7992766726943942,
+          "f1-score": 0.7846153846153846,
           "support": 4977.0
         },
-        "accuracy": 0.7632348492487647,
+        "accuracy": 0.7797721085005546,
         "macro avg": {
-          "precision": 0.7632768797988128,
-          "recall": 0.763256384225738,
-          "f1-score": 0.7632328245665754,
+          "precision": 0.7801717236434678,
+          "recall": 0.7796990650921364,
+          "f1-score": 0.779660694164511,
           "support": 9917.0
         },
         "weighted avg": {
-          "precision": 0.7632932495919894,
-          "recall": 0.7632348492487647,
-          "f1-score": 0.7632302413513682,
+          "precision": 0.7801355726403192,
+          "recall": 0.7797721085005546,
+          "f1-score": 0.7796791799512088,
           "support": 9917.0
         }
       },
       "confusion_matrix": [
         [
-          3799,
-          1141
+          3755,
+          1185
         ],
         [
-          1207,
-          3770
+          999,
+          3978
         ]
       ]
     },
     {
       "max_length": 100,
-      "vocabulary_size": 10000,
+      "vocabulary_size": 20000,
       "classification_report": {
         "negative": {
-          "precision": 0.7986883942766295,
-          "recall": 0.8135627530364372,
-          "f1-score": 0.8060569594865624,
+          "precision": 0.8237849017580144,
+          "recall": 0.8062753036437247,
+          "f1-score": 0.8149360613810742,
           "support": 4940.0
         },
         "positive": {
-          "precision": 0.8114636642784033,
-          "recall": 0.7964637331725939,
-          "f1-score": 0.8038937335226121,
+          "precision": 0.8116883116883117,
+          "recall": 0.8288125376732972,
+          "f1-score": 0.8201610498061438,
           "support": 4977.0
         },
-        "accuracy": 0.8049813451648684,
+        "accuracy": 0.8175859634970253,
         "macro avg": {
-          "precision": 0.8050760292775164,
-          "recall": 0.8050132431045156,
-          "f1-score": 0.8049753465045872,
+          "precision": 0.8177366067231631,
+          "recall": 0.8175439206585109,
+          "f1-score": 0.8175485555936091,
           "support": 9917.0
         },
         "weighted avg": {
-          "precision": 0.8050998613330809,
-          "recall": 0.8049813451648684,
-          "f1-score": 0.8049713110422162,
+          "precision": 0.8177140407338226,
+          "recall": 0.8175859634970253,
+          "f1-score": 0.8175583027233725,
           "support": 9917.0
         }
       },
       "confusion_matrix": [
         [
-          4019,
-          921
+          3983,
+          957
         ],
         [
-          1013,
-          3964
+          852,
+          4125
         ]
       ]
     },
     {
       "max_length": 250,
-      "vocabulary_size": 10000,
+      "vocabulary_size": 20000,
       "classification_report": {
         "negative": {
-          "precision": 0.8319377990430622,
-          "recall": 0.8447368421052631,
-          "f1-score": 0.838288469264765,
+          "precision": 0.8701352757544225,
+          "recall": 0.8463562753036438,
+          "f1-score": 0.8580810672139558,
           "support": 4940.0
         },
         "positive": {
-          "precision": 0.843501326259947,
-          "recall": 0.8306208559373116,
-          "f1-score": 0.8370115407977323,
+          "precision": 0.8515258215962441,
+          "recall": 0.8746232670283303,
+          "f1-score": 0.8629200118941421,
           "support": 4977.0
         },
-        "accuracy": 0.8376525158818191,
+        "accuracy": 0.860542502773016,
         "macro avg": {
-          "precision": 0.8377195626515046,
-          "recall": 0.8376788490212874,
-          "f1-score": 0.8376500050312486,
+          "precision": 0.8608305486753334,
+          "recall": 0.860489771165987,
+          "f1-score": 0.860500539554049,
           "support": 9917.0
         },
         "weighted avg": {
-          "precision": 0.8377411342208815,
-          "recall": 0.8376525158818191,
-          "f1-score": 0.8376476229422458,
+          "precision": 0.8607958330454123,
+          "recall": 0.860542502773016,
+          "f1-score": 0.8605095665255709,
           "support": 9917.0
         }
       },
       "confusion_matrix": [
         [
-          4173,
-          767
+          4181,
+          759
         ],
         [
-          843,
-          4134
+          624,
+          4353
         ]
       ]
     },
     {
       "max_length": 500,
-      "vocabulary_size": 10000,
+      "vocabulary_size": 20000,
       "classification_report": {
         "negative": {
-          "precision": 0.8444223107569722,
-          "recall": 0.8580971659919029,
-          "f1-score": 0.8512048192771084,
+          "precision": 0.8824018283814669,
+          "recall": 0.8597165991902834,
+          "f1-score": 0.8709115144058238,
           "support": 4940.0
         },
         "positive": {
-          "precision": 0.8568511333469471,
-          "recall": 0.8430781595338558,
-          "f1-score": 0.8499088515292688,
+          "precision": 0.8642241379310345,
+          "recall": 0.8862768736186458,
+          "f1-score": 0.8751115960718183,
           "support": 4977.0
         },
-        "accuracy": 0.8505596450539478,
+        "accuracy": 0.8730462841585157,
         "macro avg": {
-          "precision": 0.8506367220519596,
-          "recall": 0.8505876627628793,
-          "f1-score": 0.8505568354031886,
+          "precision": 0.8733129831562507,
+          "recall": 0.8729967364044646,
+          "f1-score": 0.8730115552388211,
           "support": 9917.0
         },
         "weighted avg": {
-          "precision": 0.8506599078155892,
-          "recall": 0.8505596450539478,
-          "f1-score": 0.8505544177967214,
+          "precision": 0.8732790729744081,
+          "recall": 0.8730462841585157,
+          "f1-score": 0.873019390421923,
           "support": 9917.0
         }
       },
       "confusion_matrix": [
         [
-          4239,
-          701
+          4247,
+          693
         ],
         [
-          781,
-          4196
+          566,
+          4411
         ]
       ]
     }
