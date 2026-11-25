@@ -12,9 +12,6 @@ from sklearn.metrics import (
     f1_score
 )
 
-# --------------------------------------------------
-# 1. Load datasets
-# --------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,9 +21,6 @@ val_df = pd.read_csv(BASE_DIR / "data/splits/val.csv")
 y_train = train_df["sentiment"]
 y_val = val_df["sentiment"]
 
-# --------------------------------------------------
-# 2. Tokenization and truncation
-# --------------------------------------------------
 
 MAX_TOKENS = 500
 
@@ -50,9 +44,6 @@ val_texts = val_df["review"].apply(
     lambda text: truncate_review(text, MAX_TOKENS)
 )
 
-# --------------------------------------------------
-# 3. Hyperparameters to test
-# --------------------------------------------------
 
 ALPHA_VALUES = [0.1, 1.0, 2.0, 5.0]
 MAX_FEATURES_VALUES = [5000, 10000, 20000]
@@ -60,9 +51,6 @@ NGRAM_RANGES = [(1, 1), (1, 2)]
 
 results = []
 
-# --------------------------------------------------
-# 4. Hyperparameter tuning
-# --------------------------------------------------
 
 for max_features in MAX_FEATURES_VALUES:
     for ngram_range in NGRAM_RANGES:
@@ -120,9 +108,6 @@ for max_features in MAX_FEATURES_VALUES:
                 f"Macro F1={f1:.4f}"
             )
 
-# --------------------------------------------------
-# 5. Find the best configuration
-# --------------------------------------------------
 
 results_df = pd.DataFrame(results)
 
@@ -155,9 +140,6 @@ print(f"N-gram range: {best['ngram_range']}")
 print(f"Accuracy:     {best['accuracy']:.4f}")
 print(f"Macro F1:     {best['f1_macro']:.4f}")
 
-# --------------------------------------------------
-# 6. Save results to CSV
-# --------------------------------------------------
 
 results_dir = BASE_DIR / "results" / "naive_bayes"
 results_dir.mkdir(parents=True, exist_ok=True)
